@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import moment from 'moment';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
 
 const useForm = () => {
     const [loading, setLoading] = useState('')
@@ -22,10 +28,19 @@ const useForm = () => {
         fetch('getCountry', requestOption)
         .then(async res => {
             const data = await res.json();
-            const code = data.map((item) => {
+            let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+            const code = data.map((country) => {
                 return (
                 <>
-                <p key={item.id}>{item.country_code === '??' ? item.country_code = 'Unknown Area' : item.country_code}</p>
+                  <Timeline position="left" key={country.id}>
+                  <TimelineItem>
+                    <TimelineSeparator>
+                      <TimelineDot />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>{country.country_code === '??' ? country.country_code = 'Unknown Area' : regionNames.of(country.country_code)}</TimelineContent>
+                  </TimelineItem>
+                  </Timeline>
                 </>
                 );
             });
@@ -41,9 +56,20 @@ const useForm = () => {
             const data= await res.json();
             const getTime = data.map((item, key) =>{
                 return(
-                    <>
-                    <p key={item.id}>{moment.unix(item).format('dddd, MMMM Do, YYYY h:mm:ss A')}</p>
-                    </>
+                  <>
+                  <Timeline position="right" key={key}>
+                  <TimelineItem>
+                    <TimelineSeparator>
+                      <TimelineDot />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>{moment.unix(item).format('dddd, MMMM Do, YYYY h:mm:ss A')}</TimelineContent>
+                  </TimelineItem>
+                  </Timeline>
+                  </>
+                    // <Grid container>
+                    // <Paper variant='outlined' square key={key}>{moment.unix(item).format('dddd, MMMM Do, YYYY h:mm:ss A')}</Paper>
+                    // </Grid>
                 )
             });
             setTimeData(getTime);

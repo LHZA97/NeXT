@@ -5,12 +5,25 @@ import {makeStyles} from '@material-ui/core/styles';
 
 
 const useStyle = makeStyles((theme)=>({
+  All:{
+    backgroundColor: '#AECEFF',
+    width: '100%',
+    height: '100%'
+  },
   App:{
     backgroundColor: '#8ea4ff',
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
+    display: 'flex'
   },
   Title:{
-
+    padding: '20px',
+    backgroundColor: '#ffa2c2',
+    margin: '10px',
+    width: '120%',
+    textAlign: 'center',
+    stroke: 'black',
+    strokeWidth: '10px',
+    fontWeight: 900
   },
   Fill:{
     backgroundColor: '#efecf4'
@@ -21,13 +34,9 @@ const useStyle = makeStyles((theme)=>({
 }))
 
 function App() {
-  const { getTimeStamp, loading, result, timeData, setDate, setTime, ListData } = useForm();
+  const { getTimeStamp, loading, result, timeData, setDate, setTime } = useForm();
   const classes = useStyle();
-  // const [longitude, setLongitude] = useState('');
-  // const [latitude, setLatitude] = useState('');
-  let txt = '';
-  
-  
+  let txt;
 
   useEffect(()=>{
     var date = new Date();
@@ -45,14 +54,13 @@ function App() {
     document.getElementById("timeChoice").setAttribute("value", currentTime);
   }, [])
   
-  
-   
-
-
+ 
   return (
-    <>
+    <div className={classes.All}>
     <div className={classes.App}>
-      <Typography variant='h4' align='center' paddingBottom='5vh'>CHOOSE YOUR PAST DATE AND TIME TO TRACK ISS LOCATION!</Typography>
+      <div className={classes.Title}>
+      <Typography variant='h4' align= 'center' >CHOOSE YOUR PAST DATE AND TIME TO TRACK ISS LOCATION!</Typography>
+      </div>
       <Grid container spacing={2} justifyContent='center'>
         <Grid item>
           <Input className={classes.Fill} type='date' id='dateChoice' onChange={(e)=>setDate(e.target.value)}/>
@@ -65,15 +73,15 @@ function App() {
         </Grid>
       </Grid>
     </div>
-      <Grid container spacing={2} justifyContent='center'>
-        <Grid item xs={2}>
+      <Grid container spacing={3} justifyContent='center' align= 'center'>
+        <Grid item xs={3}>
           {loading ? timeData : txt='waiting...'}
         </Grid>
-        <Grid item xs={2}>
-          {loading ? <ListData items={result}/> : txt='waiting...'}
+        <Grid item xs={3}>
+          {loading ? result : txt='waiting...'}
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
 
