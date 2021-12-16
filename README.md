@@ -18,8 +18,8 @@ How to run the project:
 
 **Notes**
 
->><li>It is recommended to create the container with the NodeJS runtime if you just want to play around with the code, <a href="https://code.visualstudio.com/docs/remote/create-dev-container">here</a> is the link to create container.</li>
->><li>If your terminal cannot run nodemon, please install the nodemon globally, and if it not working, install nodemon on your Windows/Mac environment.</li>
+><li>It is recommended to create the container with the NodeJS runtime if you just want to play around with the code, <a href="https://code.visualstudio.com/docs/remote/create-dev-container">here</a> is the link to create container.</li>
+><li>If your terminal cannot run nodemon, please install the nodemon globally, and if it not working, install nodemon on your Windows/Mac environment.</li>
 
 
 **INCLUDED Extension**
